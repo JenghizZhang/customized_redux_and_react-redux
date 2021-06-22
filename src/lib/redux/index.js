@@ -49,9 +49,23 @@ export function createStore(reducer){
 }
 
 //整合传入参数对象中的多个reducer函数，返回一个新的reducer函数
-//indeedreducer管理的总状态:{ ri:state1,r2:state2}
+/*
+    {
+        count: count(state.count, action)
+        user: count(state.user, action)
+    }
+*/
 export function combineReducers(reducers) {
-    return (state, action) => {
-
+    // 返回一个新的reducer 函数
+    // 函数接收的是总的state 和指定的action
+    return (state = {}, action) => {
+        // 遍历调用所有的reducer, 并得到其返回的新状态值, 并封装成对象作为总的新state 对象
+        // ['count','user']
+        const newState = Object.keys(reducers).reduce((preState, key) => {
+            preState[key] = reducers[key](state[key], action)
+            return preState
+        }, {})
+        // 返回新的状态对象
+        return newState
     }
 }

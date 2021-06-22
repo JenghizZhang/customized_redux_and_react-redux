@@ -27,7 +27,7 @@ export default class App extends Component {
 
   incrementIfOdd = () => {
     const number = this.numberRef.current.value * 1
-    if (this.props.store.getState() % 2 === 1) {
+    if (this.props.store.getState().count % 2 === 1) {
       this.props.store.dispatch(increment(number))
     }
 
@@ -41,7 +41,7 @@ export default class App extends Component {
   }
 
   render() {
-    const count = this.props.store.getState()
+    const count = this.props.store.getState().count
 
     return (
       <div>
