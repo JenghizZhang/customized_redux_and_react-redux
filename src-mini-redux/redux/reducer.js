@@ -4,11 +4,9 @@ reducer函数模块: 根据当前state和指定action返回一个新的state
 import {INCREMENT, DECREMENT} from './action-types'
 import { combineReducers } from '../lib/redux'
 
-/*
-管理count状态数据的reducer
- */
+//管理count状态数据的reducer
 function count(state=1, action) {
-  console.log('count()', state, action)
+  console.log('reducer', state, action)
   switch (action.type) {
     case INCREMENT:
       return state + action.data

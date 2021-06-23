@@ -1,7 +1,7 @@
 /*
 redux最核心的管理对象: store
  */
-import {createStore} from '../lib/redux'
+import { createStore } from '../lib/redux'
 
 import reducer from './reducer'
 
