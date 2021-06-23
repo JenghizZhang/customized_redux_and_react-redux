@@ -1,33 +1,35 @@
 # 自定义简单版redux和react-redux相关库
 ## src下的lib为自定义的库，其他的为此库的应用显示
 
-## 1. 在项目中搭建redux整套环境
-    1). store.js
-    2). reducer.js
-    3). actions.js
-    4). action-types.js
-    5). index.js
-    6). 在需要与redux进行状态数据通信(读/写)的UI组件包装生成容器组件
+## 1. redux理解
+	什么?: redux是专门做状态管理的独立第3方库, 不是react插件, 但一般都用在react项目中
+	作用?: 对应用中状态进行集中式的管理(写/读)
+	开发: 与react-redux, redux-thunk等插件配合使用
 
-## 2. 通过redux管理头部标题headTitle数据
-    1). action-types.js
-    2). actoins.js
-    3). reducer.js
-    4). 相关组件: 
-        left-nav.js
-        header.js
+## 2. redux相关API
+	redux中包含: createStore(), applyMiddleware(), combineReducers()
+	store对象: getState(), dispatch(), subscribe()
+	react-redux: 
+		<Provider store={store}>: 向所有的容器组件提供store
+		connect(
+			state => ({xxx: state.xxx}),
+			{actionCreator1, actionCreator2}
+		)(UI组件): 
+			产生的就是容器组件, 负责向UI组件传递标签属性, 
+			一般属性值从state中获取, 函数属性内部会执行dispatch分发action
+
+## 3. redux核心概念(3个)
+	action: 
+		默认是对象(同步action), {type: 'xxx', data: value}, 需要通过对应的actionCreator产生, 
+		它的值也可以是函数(异步action), 需要引入redux-thunk才可以
+	reducer
+		根据老的state和指定的action, 返回一个新的state
+		不能修改老的state
+	store
+		redux最核心的管理对象
+		内部管理着: state和reducer
+		提供方法: getState(), dispatch(action), subscribe(listener)
         
-## 3. 通过redux管理登陆用户信息user数据
-    1). action-types.js
-    2). actoin.js
-    3). reducer.js
-    4). 相关组件: 
-        login.js
-        admin.js
-        left-nav.js
-        header.js
-        role.js
-
 ## 4. 自定义redux库
     1). redux库向外暴露下面几个函数
         createStore(): 接收的参数为reducer函数, 返回为store对象
